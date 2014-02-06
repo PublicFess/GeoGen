@@ -3,3 +3,34 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  div#container
+
+block scripts
+  script.
+    var points;
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/array', false);
+    xhr.send(null);
+    console.log(xhr)
+    points = JSON.parse(xhr.responseText);
+
+    console.log(points)
+
+    var stage = new Kinetic.Stage({
+      container: 'container',
+      width: 800,
+      height: 800
+    });
+
+    var layer = new Kinetic.Layer();
+
+    var redLine = new Kinetic.Line({
+      points: points.points,
+      stroke: 'red',
+      strokeWidth: 1,
+      lineCap: 'round',
+      lineJoin: 'round'
+    });
+
+    layer.add(redLine);
+    stage.add(layer);

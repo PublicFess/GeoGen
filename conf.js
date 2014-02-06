@@ -17,7 +17,9 @@ exports.assetsPath = __dirname + '/assets';
 exports.assets = {
   global: [
     '/css/main.css',
-    '/css/font-awesome.css'
+    '/css/font-awesome.css',
+
+    '/js/kinetic.js'
   ]
 };
 
