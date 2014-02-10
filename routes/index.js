@@ -23,8 +23,10 @@ app.get('/array', function(req, res, next){
     if (arr[idx] ) return;
     var max = R*(arr[endIdx].x - arr[startIdx].x);
     var min = (-1)*R*(arr[endIdx].x - arr[startIdx].x);
-    var height = ((arr[startIdx].y + arr[endIdx].y) / 2)
-      + Math.random() * (max - min) + min;
+    var height = Math.floor(((arr[startIdx].y + arr[endIdx].y) / 2)
+      + Math.random() * (max - min) + min);
+
+    var j =
     arr[idx] = {
       x: idx,
       y: height
@@ -37,9 +39,13 @@ app.get('/array', function(req, res, next){
   generate(0, 99);
 
   var result = [];
-  arr.forEach(function(point){
-    result.push(point.x*8);
+  arr.forEach(function(point, idx){
+    result.push(point.x * 8);
     result.push(point.y);
+    if (arr[idx + 1]) {
+      result.push(point.x * 8);
+      result.push(arr[idx + 1].y)
+    }
   });
 
   res.json({
